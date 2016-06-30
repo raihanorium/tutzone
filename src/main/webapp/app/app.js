@@ -12,6 +12,7 @@ app.controller('appCtrl', ['$scope', 'Restangular', function($scope, Restangular
     $scope.users = usersBase.getList().$object;
 
     $scope.deleteUser = function(id){
-        console.log(id);
+        $scope.users[id-1].remove(id);
+        $scope.apply();
     }
 }]);

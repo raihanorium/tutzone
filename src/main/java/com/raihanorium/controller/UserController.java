@@ -1,9 +1,9 @@
 package com.raihanorium.controller;
 
 import com.raihanorium.model.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.raihanorium.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,21 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAll(){
-        List<User> users = new ArrayList<>();
+        return userService.getAll();
+    }
 
-        users.add(new User(1, "Cheater 1"));
-        users.add(new User(2, "Cheater 2"));
-        users.add(new User(3, "Cheater 3"));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User get(@PathVariable(value = "id") long id){
+        return userService.get(id);
+    }
 
-        return users;
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public boolean delete(@PathVariable(value = "id") long id){
+        return userService.delete(id);
     }
 }
