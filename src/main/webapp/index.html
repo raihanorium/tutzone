@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="appCtrl">
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Title</a>
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>{{message}}</h1>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td class="text-center">
+                <button ng-click="deleteUser(user.id);" class="btn btn-xs btn-danger"><span
+                        class="glyphicon glyphicon-trash"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- jQuery -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--AngularJs-->
+<script src="bower_components/angular/angular.js"></script>
+<!--Restangular-->
+<script src="bower_components/underscore/underscore-min.js"></script>
+<script src="bower_components/restangular/dist/restangular.min.js"></script>
+<!--App-->
+<script src="app/app.js"></script>
+</body>
+</html>

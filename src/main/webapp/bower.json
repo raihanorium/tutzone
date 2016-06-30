@@ -1,0 +1,27 @@
+{
+  "name": "webapp",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Raihan <raihan.dk@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.7",
+    "jquery": "^3.0.0",
+    "bootstrap": "^3.3.6",
+    "restangular": "^1.5.2",
+    "underscore": "^1.8.3"
+  }
+}
