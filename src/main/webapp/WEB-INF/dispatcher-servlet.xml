@@ -13,4 +13,6 @@
     <context:component-scan base-package="com.raihanorium"/>
     <context:annotation-config />
     <mvc:annotation-driven/>
+
+    <bean id="userService" class="com.raihanorium.service.UserServiceMockImpl" />
 </beans>
