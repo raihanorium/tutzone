@@ -12,7 +12,7 @@ public interface UserService {
 
     User get(long id);
 
-    User create(User user);
+    User create(String userName);
 
     boolean delete(long id);
 }

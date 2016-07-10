@@ -23,14 +23,14 @@ public class UserServiceMockImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         return users;
     }
 
     @Override
-    public boolean delete(long id){
-        for (User user : users){
-            if(user.getId() == id){
+    public boolean delete(long id) {
+        for (User user : users) {
+            if (user.getId() == id) {
                 users.remove(user);
                 return true;
             }
@@ -40,9 +40,9 @@ public class UserServiceMockImpl implements UserService {
     }
 
     @Override
-    public User get(long id){
-        for (User user : users){
-            if(user.getId() == id){
+    public User get(long id) {
+        for (User user : users) {
+            if (user.getId() == id) {
                 return user;
             }
         }
@@ -51,8 +51,9 @@ public class UserServiceMockImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
-        users.add(new User(0, "Cheater 0"));
+    public User create(String userName) {
+        User user = new User((users.size() + 1), userName);
+        users.add(user);
         return user;
     }
 }

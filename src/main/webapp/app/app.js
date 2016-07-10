@@ -11,10 +11,19 @@ app.controller('appCtrl', ['$scope', 'Restangular', function ($scope, Restangula
 
     $scope.users = usersBase.getList().$object;
 
-    $scope.deleteUser = function (id) {
+    $scope.deleteUser = function (user) {
         if (!confirm('Are you sure you want to delete?')) return;
 
-        $scope.users[id - 1].remove(id);
-        $scope.users = usersBase.getList().$object;
+        user.remove().then(function () {
+            var index = $scope.users.indexOf(user);
+            if (index > -1) $scope.users.splice(index, 1);
+        });
+    }
+
+    $scope.createUser = function () {
+        usersBase.post($scope.userName).then(function () {
+            $scope.users = usersBase.getList().$object;
+            $scope.userName = null;
+        });
     }
 }]);
