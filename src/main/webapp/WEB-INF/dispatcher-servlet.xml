@@ -14,5 +14,5 @@
     <context:annotation-config />
     <mvc:annotation-driven/>
 
-    <bean id="userService" class="com.raihanorium.service.UserServiceMockImpl" />
+    <bean id="userService" class="com.raihanorium.service.UserServiceImpl" />
 </beans>

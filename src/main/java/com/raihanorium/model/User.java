@@ -1,11 +1,21 @@
 package com.raihanorium.model;
 
+import javax.persistence.*;
+
 /**
  * Created by Raihan on 6/30/2016.
  */
+@Entity
+@Table(name = "USER_DETAIL")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String name;
+
+    public User() {
+    }
 
     public User(long id, String name) {
         this.id = id;
