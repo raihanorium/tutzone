@@ -15,4 +15,6 @@ public interface UserService {
     User create(String userName);
 
     boolean delete(long id);
+
+    User update(User user);
 }

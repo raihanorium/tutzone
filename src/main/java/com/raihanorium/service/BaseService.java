@@ -60,6 +60,24 @@ public abstract class BaseService {
         return null;
     }
 
+    public Object save(Object object){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        try {
+            session.update(object);
+            session.getTransaction().commit();
+
+            return object;
+        } catch (Exception e) {
+            System.out.println(e);
+            session.getTransaction().rollback();
+        }
+
+        return null;
+    }
+
     public boolean delete(long id, Class clazz){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();

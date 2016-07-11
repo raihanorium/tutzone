@@ -1,9 +1,6 @@
 package com.raihanorium.service;
 
 import com.raihanorium.model.User;
-import com.raihanorium.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 
@@ -32,5 +29,10 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public boolean delete(long id) {
         return delete(id, User.class);
+    }
+
+    @Override
+    public User update(User user) {
+        return (User) save(user);
     }
 }

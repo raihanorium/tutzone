@@ -5,7 +5,6 @@ import com.raihanorium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +31,10 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public User create(@RequestBody String userName){
         return userService.create(userName);
+    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public User update(@RequestBody User user){
+        return userService.update(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -21,9 +21,27 @@ app.controller('appCtrl', ['$scope', 'Restangular', function ($scope, Restangula
     }
 
     $scope.createUser = function () {
-        usersBase.post($scope.userName).then(function () {
-            $scope.users = usersBase.getList().$object;
-            $scope.userName = null;
+        if ($('#actionButton').text() === 'Create') {
+            // create
+            usersBase.post($scope.user.name).then(function () {
+                $scope.users = usersBase.getList().$object;
+                $scope.user = null;
+            });
+        } else {
+            // update
+            $scope.user.put().then(function () {
+                $scope.users = usersBase.getList().$object;
+                $scope.user = null;
+                $('#actionButton').text('Create');
+            });
+        }
+    }
+
+    $scope.editUser = function (user) {
+        usersBase.get(user.id).then(function(userInDb){
+            $scope.user = userInDb;
         });
+
+        $('#actionButton').text('Save');
     }
 }]);

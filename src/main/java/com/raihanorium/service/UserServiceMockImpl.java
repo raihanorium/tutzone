@@ -40,6 +40,11 @@ public class UserServiceMockImpl implements UserService {
     }
 
     @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
     public User get(long id) {
         for (User user : users) {
             if (user.getId() == id) {
