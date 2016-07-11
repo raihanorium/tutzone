@@ -20,8 +20,8 @@ app.controller('appCtrl', ['$scope', 'Restangular', function ($scope, Restangula
         });
     }
 
-    $scope.createUser = function () {
-        if ($('#actionButton').text() === 'Create') {
+    $scope.saveUser = function () {
+        if (!$scope.user.id) {
             // create
             usersBase.post($scope.user.name).then(function () {
                 $scope.users = usersBase.getList().$object;
@@ -38,7 +38,7 @@ app.controller('appCtrl', ['$scope', 'Restangular', function ($scope, Restangula
     }
 
     $scope.editUser = function (user) {
-        usersBase.get(user.id).then(function(userInDb){
+        usersBase.get(user.id).then(function (userInDb) {
             $scope.user = userInDb;
         });
 
