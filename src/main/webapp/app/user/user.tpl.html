@@ -1,0 +1,43 @@
+<h1>{{message}}</h1>
+
+<div class="col-md-{{ (users.length > 0)? 6 : 12 }}">
+    <ng-form name="createUserForm" role="form">
+        <legend>Crate</legend>
+
+        <input type="hidden" id="id" ng-model="user.id" />
+
+        <div class="form-group">
+            <label for="userName">Name</label>
+            <input type="text" class="form-control" id="userName" ng-model="user.name"
+                   placeholder="Name of user" ng-required="true">
+        </div>
+
+        <button id="actionButton" type="button" ng-click="saveUser()" class="btn btn-primary"
+                ng-disabled="createUserForm.$invalid">Create</button>
+    </ng-form>
+</div>
+
+<div class="col-md-6" ng-show="(users.length > 0)">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td class="text-center">
+                <button ng-click="editUser(user);" class="btn btn-xs btn-warning" title="Edit"><span
+                        class="glyphicon glyphicon-edit"></span></button>
+
+                <button ng-click="deleteUser(user);" class="btn btn-xs btn-danger" title="Delete"><span
+                        class="glyphicon glyphicon-trash"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
