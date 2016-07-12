@@ -1,14 +1,13 @@
 package com.raihanorium.service;
 
 import com.raihanorium.model.User;
-
-import java.util.List;
+import com.raihanorium.util.Page;
 
 /**
  * Created by Raihan on 7/10/2016.
  */
 public interface UserService {
-    List<User> getAll();
+    Page getAll(Page page);
 
     User get(long id);
 

@@ -1,9 +1,12 @@
 package com.raihanorium.service;
 
 import com.raihanorium.util.HibernateUtil;
+import com.raihanorium.util.Page;
+import com.raihanorium.util.SortDirection;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 
 import java.util.List;
 
@@ -11,17 +14,25 @@ import java.util.List;
  * Created by Raihan on 7/11/2016.
  */
 public abstract class BaseService {
-    public List getAll(Class clazz) {
+    public Page getAll(Class clazz, Page page) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         try {
-            ClassMetadata classMetadata = sessionFactory.getClassMetadata(clazz);
-            String entityName = classMetadata.getEntityName();
-            List list = session.createQuery("FROM " + entityName).list();
+            List list = session.createCriteria(clazz)
+                    .setFirstResult(page.getOffset())
+                    .setMaxResults(page.getPageSize())
+                    .addOrder(
+                            (page.getSortDirection() == SortDirection.ASC) ?
+                                    Order.asc(page.getSortColumn()) :
+                                    Order.desc(page.getSortColumn()))
+                    .list();
 
-            return list;
+            page.setResource(list);
+            page.setTotalCount(count(clazz));
+
+            return page;
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -42,7 +53,7 @@ public abstract class BaseService {
         return null;
     }
 
-    public Object create(Object object){
+    public Object create(Object object) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -60,7 +71,7 @@ public abstract class BaseService {
         return null;
     }
 
-    public Object save(Object object){
+    public Object save(Object object) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -78,7 +89,7 @@ public abstract class BaseService {
         return null;
     }
 
-    public boolean delete(long id, Class clazz){
+    public boolean delete(long id, Class clazz) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -97,5 +108,20 @@ public abstract class BaseService {
         }
 
         return false;
+    }
+
+    public long count(Class clazz) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        long count = 0;
+
+        try {
+            count = (long) session.createCriteria(clazz).setProjection(Projections.rowCount()).uniqueResult();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return count;
     }
 }

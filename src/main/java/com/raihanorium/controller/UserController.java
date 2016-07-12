@@ -2,10 +2,9 @@ package com.raihanorium.controller;
 
 import com.raihanorium.model.User;
 import com.raihanorium.service.UserService;
+import com.raihanorium.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by Raihan on 6/30/2016.
@@ -19,8 +18,8 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<User> getAll() {
-        return userService.getAll();
+    public Page getAll(@RequestBody Page page) {
+        return userService.getAll(page);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -1,8 +1,7 @@
 package com.raihanorium.service;
 
 import com.raihanorium.model.User;
-
-import java.util.List;
+import com.raihanorium.util.Page;
 
 /**
  * Created by Raihan on 7/11/2016.
@@ -10,8 +9,8 @@ import java.util.List;
 public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
-    public List<User> getAll() {
-        return getAll(User.class);
+    public Page getAll(Page page) {
+        return getAll(User.class, page);
     }
 
     @Override
