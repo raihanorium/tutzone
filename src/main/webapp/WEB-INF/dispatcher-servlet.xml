@@ -3,16 +3,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security
+	    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
     <context:component-scan base-package="com.raihanorium"/>
-    <context:annotation-config />
+    <context:annotation-config/>
     <mvc:annotation-driven/>
 
-    <bean id="userService" class="com.raihanorium.service.UserServiceImpl" />
+    <bean id="userService" class="com.raihanorium.service.UserServiceImpl"/>
+    
+    <!--security-->
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/user**" method="GET" access="ROLE_USER"/>
+
+        <security:form-login
+                login-page="/login"
+                default-target-url="/welcome"
+                authentication-failure-url="/login?error" username-parameter="username" password-parameter="password" />
+
+        <security:logout logout-success-url="/login?logout" />
+    </security:http>
+    
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="admin" authorities="ROLE_USER"/>
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
 </beans>

@@ -10,11 +10,19 @@
         <property name="use_sql_comments">false</property>
         <property name="hbm2ddl.auto">create-drop</property>
 
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/contacts</property>
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">123456</property>
+        <!--use postgresql-->
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>-->
+        <!--<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/contacts</property>-->
+        <!--<property name="hibernate.connection.username">postgres</property>-->
+        <!--<property name="hibernate.connection.password">123456</property>-->
+
+        <!--use mysql-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/contacts</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
 
         <!-- mappings -->
         <mapping class="com.raihanorium.model.User" />

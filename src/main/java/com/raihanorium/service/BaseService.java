@@ -20,6 +20,10 @@ public abstract class BaseService {
         session.beginTransaction();
 
         try {
+            page.setOffset((page.getOffset() == null) ? 0 : page.getOffset());
+            page.setPageSize((page.getPageSize() == null) ? 0 : page.getPageSize());
+            page.setSortColumn((page.getSortColumn() == null) ? "name" : page.getSortColumn());
+
             List list = session.createCriteria(clazz)
                     .setFirstResult(page.getOffset())
                     .setMaxResults(page.getPageSize())

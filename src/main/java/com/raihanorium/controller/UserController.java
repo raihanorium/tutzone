@@ -18,7 +18,10 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page getAll(@RequestBody Page page) {
+    public Page getAll(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        Page page = new Page();
+        page.setOffset(offset);
+        page.setPageSize(pageSize);
         return userService.getAll(page);
     }
 

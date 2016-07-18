@@ -13,6 +13,15 @@ app.config(['$stateProvider', 'RestangularProvider', function ($stateProvider, R
 
     // restangular configuration
     RestangularProvider.setBaseUrl('/api/');
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        var extractedData;
+        if (operation === "getList") {
+            extractedData = data.resource;
+        } else {
+            extractedData = data;
+        }
+        return extractedData;
+    });
 }]);
 
 app.controller('appCtrl', [function () {
